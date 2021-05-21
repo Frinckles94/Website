@@ -130,7 +130,8 @@
             else $addQuery = "INSERT INTO products (`SKU`, `Name`, `Price`, `Height`, `Width`, `Length`) VALUES ('$sku', '$name', '$price', '$height', '$width', '$length')";
             
             $conn -> query($addQuery) or die($conn->error);
-            header("Location: ../home.php"); 
+            header("Location: ../");
+            exit(); 
         }
    
     }
