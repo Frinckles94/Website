@@ -59,17 +59,17 @@ include "./database/form.php";
                     }
                 </script>
 
-                <div id="diskT" hidden>
+                <div class = "dynamic" id="disk" hidden>
                     <label> Size (MB)</label>
                     <input type="number" name="size" value="<?php inputValue("size") ?>">
                     <p> <?php errorValue("Size"); ?> </p>
                 </div>
-                <div id="bookT" hidden>
+                <div class = "dynamic" id="book" hidden>
                     <label> Weight (KG)</label>
                     <input type="number" name="weight" value="<?php inputValue("weight") ?>">
                     <p> <?php errorValue("Weight"); ?> </p>
                 </div>
-                <div id="furnitureT" hidden>
+                <div class = "dynamic" id="furniture" hidden>
                     <label> Height (CM) </label>
                     <input type="number" name="height" value="<?php inputValue("height") ?>">
                     <p> <?php errorValue("Height"); ?> </p>
