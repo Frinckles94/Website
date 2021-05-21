@@ -1,0 +1,136 @@
+body{
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    background-color: whitesmoke;
+    margin: 0;
+}
+
+div.container{
+    width: 80%;
+    margin: auto;
+    
+    
+}
+
+div#heading{
+    float:left;
+    padding: 20px;
+}
+
+div.box{
+    float:left;
+    width: 21%;
+    border: 1px groove black;
+    border-radius: 5px;
+    text-align: center;
+    margin: 20px;
+}
+
+div.box:hover{
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+    transition: box-shadow 0.4s ease-in-out;
+}
+
+header{
+    width: 100%;
+    background-color: wheat;
+    margin-bottom: 30px;
+    height: 110px;
+    
+}
+
+header nav{
+    margin-top: 30px;
+    float: right;
+}
+
+
+header li{
+    display: inline;
+    margin: 20px;
+}
+
+li input{
+    display: inline;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+li a{
+    text-decoration: none;
+    color: black;
+    
+}
+
+li a, li input{
+    text-transform: uppercase;
+    background-color: lightgray;
+    width: auto;
+    border: solid;
+    padding: 5px 25px 5px 25px;
+}
+
+footer p{
+    margin: 0;
+    text-align: center;
+    
+    
+}
+
+footer{
+    bottom: 0;
+    box-shadow: 0 0 5px 0 gray;
+    width: 100%;
+    position: fixed;
+}
+
+input[type=checkbox]{
+    margin: 0;
+    float: left;    
+    width: 17px;
+    height: 17px;
+}
+
+#addForm p{
+    color: red;
+}
+
+#addForm input[type=text], #addForm input[type=number]{
+    padding: 10px 20px;
+    margin: 10px 0;
+    width: 30%;
+    
+}
+
+label{
+    display: inline-block;
+    width: 100px;
+}
+
+select{
+    width: 10%;
+    padding: 10px 20px;
+    margin: 10px 0;
+}
+
+header li a:hover , input[type=submit]:hover{
+    color: white;
+    transition: color 0.3s ease-in-out;
+}
+
+
+@media(max-width: 1260px){
+    div.box{
+        width: 100%;
+    }
+
+    header nav{
+        text-align: center;
+        margin-top: 0;
+    }
+    
+    div#heading{
+        float: none;
+    }
+}
+
