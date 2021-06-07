@@ -46,12 +46,12 @@
             $errors["Product"] = "Please provide product type";
         }else{
             $productType = $_POST["product"];
-            Product::validate($productType);
+            (new ProductController)->validate(new $productType);
         }
         
         if(count($errors) == 0){
-            $product = Product::make($productType);
-            $product ->addToDB();
+            $object = new $productType;
+            $object-> addToDB();
         }
    
     }

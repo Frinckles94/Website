@@ -1,50 +1,65 @@
 <?php
-class Product {
+
+interface Product{
+    public function addToDB();
+    public static function validateForm();
+
+}
+
+
+
+class Disk implements Product{
     protected $sku;
     protected $name;
     protected $price;
+    protected $size;
 
-    public function __construct($sku, $name, $price){
+    public function __construct(){
+        global $sku;
+        global $name;
+        global $price;
+        global $size;
         $this->sku = $sku;
         $this->name = $name;
         $this->price = $price;
+        $this->size = $size;
     }
 
-    public static function make($type){
-        switch($type){
-            case "disk":
-                return new Disk();
-                break;
-            case "book":
-                return new Book();
-                break;
-            case "furniture":
-                return new Furniture();
-                break;
-            default:
-                break;
-        }
-    }
 
-    public static function validate($type){
-        switch($type){
-            case "disk":
-                return Disk::validateForm();
-                break;
-            case "book":
-                return Book::validateForm();
-                break;
-            case "furniture":
-                return Furniture::validateForm();
-                break;
-            default:
-                break;
-        }
+    public function addToDB(){
+        global $conn;
+        $addQuery = "INSERT INTO products (`SKU`, `Name`, `Price`, `Size`) VALUES ('$this->sku', '$this->name', '$this->price', '$this->size')";
+        $conn -> query($addQuery) or die($conn->error);
+        header("Location: ../");
+        exit(); 
+    } 
 
+    public static function validateForm(){
+        global $errors;
+        global $size;
+        if(empty($_POST["size"])){
+            $errors["Size"] = "Please provide size";
+        }else{
+            if(is_numeric($_POST["size"])){
+                if($_POST["size"]<0){
+                    $errors["Size"] = "Please provide positive values"; 
+                }else{
+                    $size = $_POST["size"];
+                }
+            }else{
+                $errors["Size"] = "Please provide data of indicated type";
+            }
+        }
+            
     }
 }
 
-class Book extends Product{
+
+
+class Book implements Product{
+    protected $sku;
+    protected $name;
+    protected $price;
     protected $weight;
 
     public function __construct(){
@@ -57,6 +72,7 @@ class Book extends Product{
         $this->price = $price;
         $this->weight = $weight;
     }
+
 
     public function addToDB(){
         global $conn;
@@ -85,15 +101,17 @@ class Book extends Product{
         }
     }
 
-
 }
 
 
-class Furniture extends Product{
+
+class Furniture implements Product{
+    protected $sku;
+    protected $name;
+    protected $price;
     protected $height;
     protected $width;
     protected $length;
-
 
     public function __construct(){
         global $sku;
@@ -107,12 +125,13 @@ class Furniture extends Product{
         $this->price = $price;
         $this->height = $height;
         $this->width = $width;
-        $this-> lenght = $length;
+        $this->length = $length;
     }
+
 
     public function addToDB(){
         global $conn;
-        $addQuery = "INSERT INTO products (`SKU`, `Name`, `Price`, `Height`, `Width`, `Length`) VALUES ('$this->sku', '$this->name', '$this->price', '$this->height', '$this->width', '$$this->length')";    
+        $addQuery = "INSERT INTO products (`SKU`, `Name`, `Price`, `Height`, `Width`, `Length`) VALUES ('$this->sku', '$this->name', '$this->price', '$this->height', '$this->width', '$this->length')";    
         $conn -> query($addQuery) or die($conn->error);
         header("Location: ../");
         exit(); 
@@ -166,50 +185,13 @@ class Furniture extends Product{
             }
         }
     }
-
+    
 }
 
 
-class Disk extends Product{
-    protected $size;
-
-    public function __construct(){
-        global $sku;
-        global $name;
-        global $price;
-        global $size;
-        $this->sku = $sku;
-        $this->name = $name;
-        $this->price = $price;
-        $this->size = $size;
+class ProductController{
+    public function validate(Product $productClass){
+        $productClass->validateForm();
     }
-
-
-    public function addToDB(){
-        global $conn;
-        $addQuery = "INSERT INTO products (`SKU`, `Name`, `Price`, `Size`) VALUES ('$this->sku', '$this->name', '$this->price', '$this->size')";
-        $conn -> query($addQuery) or die($conn->error);
-        header("Location: ../");
-        exit(); 
-    } 
-
-    public static function validateForm(){
-        global $errors;
-        global $size;
-        if(empty($_POST["size"])){
-            $errors["Size"] = "Please provide size";
-        }else{
-            if(is_numeric($_POST["size"])){
-                if($_POST["size"]<0){
-                    $errors["Size"] = "Please provide positive values"; 
-                }else{
-                    $size = $_POST["size"];
-                }
-            }else{
-                $errors["Size"] = "Please provide data of indicated type";
-            }
-        }
-            
-    }
-
 }
+
