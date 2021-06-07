@@ -30,14 +30,12 @@ class Database{
 
     public function delete(){
         if(isset($_POST["delete"])){
-
             foreach($_POST['delete'] as $toDelete){
                 $deleteQuery = "DELETE FROM products WHERE SKU = '".$toDelete."'";
-                $this->conn -> query($deleteQuery);
+                $this->conn->query($deleteQuery);
                 
             }
             header("Location: ../");
-            exit();
         }
     }
 
@@ -45,3 +43,4 @@ class Database{
         $this->conn->query($addQuery) or die($this->conn->error);
     }
 }
+

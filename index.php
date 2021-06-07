@@ -1,4 +1,5 @@
 <?php
+
 include './database/databaseClass.php';
 $database = new Database;
 $database->connect();
@@ -18,4 +19,5 @@ switch($uri){
     default:
         http_response_code(404);
         break;
+
 }

@@ -6,8 +6,6 @@ interface Product{
 
 }
 
-
-
 class Disk implements Product{
     protected $sku;
     protected $name;
@@ -41,7 +39,7 @@ class Disk implements Product{
             $errors["Size"] = "Please provide size";
         }else{
             if(is_numeric($_POST["size"])){
-                if($_POST["size"]<0){
+                if($_POST["size"]<=0){
                     $errors["Size"] = "Please provide positive values"; 
                 }else{
                     $size = $_POST["size"];
@@ -90,7 +88,7 @@ class Book implements Product{
             $errors["Weight"] = "Please provide weight";
         }else{
             if(is_numeric($_POST["weight"])){
-                if($_POST["weight"]<0){
+                if($_POST["weight"]<=0){
                     $errors["Weight"] = "Please provide positive values"; 
                 }else{
                     $weight = $_POST["weight"];
@@ -147,7 +145,7 @@ class Furniture implements Product{
             $errors["Height"] = "Please provide height";
         }else{
             if(is_numeric($_POST["height"])){
-                if($_POST["height"]<0){
+                if($_POST["height"]<=0){
                     $errors["Height"] = "Please provide positive values"; 
                 }else{
                     $height = $_POST["height"];
@@ -161,7 +159,7 @@ class Furniture implements Product{
             $errors["Width"] = "Please provide width";
         }else{
             if(is_numeric($_POST["width"])){
-                if($_POST["width"]<0){
+                if($_POST["width"]<=0){
                     $errors["Width"] = "Please provide positive values"; 
                 }else{
                     $width = $_POST["width"];
@@ -175,7 +173,7 @@ class Furniture implements Product{
             $errors["Length"] = "Please provide length";
         }else{
             if(is_numeric($_POST["length"])){
-                if($_POST["length"]<0){
+                if($_POST["length"]<=0){
                     $errors["Length"] = "Please provide positive values"; 
                 }else{
                     $length = $_POST["length"];

@@ -39,7 +39,7 @@ include "./database/form.php";
                 <input type="text" name="name" value="<?php inputValue("name"); ?>">
                 <p> <?php errorValue("Name"); ?> </p>
                 <label> Price ($) </label>
-                <input type="number" name="price" value="<?php inputValue("price") ?>">
+                <input type="text" name="price" value="<?php inputValue("price") ?>">
                 <p> <?php errorValue("Price"); ?> </p>
 
                 <label> Type </label>

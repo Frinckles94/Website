@@ -1,5 +1,6 @@
 <?php
 include './database/form.php';
+ob_start();
 ?>
 
 <!DOCTYPE html>
@@ -21,12 +22,11 @@ include './database/form.php';
                     <nav>
                         <ul> 
                             <li> <a href="/product/add"> Add </a> </li>
-                            <li> <input type="submit" value="Mass Delete" name="deleteButton" onclick="<?php $database->delete()?>"> </li>
+                            <li> <input type="submit" value="Mass Delete" name="deleteButton" onclick="<?php $database->delete();?>"> </li>
                         </ul>
                     </nav>
                 </div>
             </header>
-
         
             <div class= container>
                 <?php
@@ -62,9 +62,8 @@ include './database/form.php';
                 
                 
             </div>
+            
         </form>
-
-
 
         <footer>
             <p> Scandiweb Test Assignment </p>
@@ -75,3 +74,6 @@ include './database/form.php';
 
 </html>
 
+<?php
+ob_end_flush();
+?>

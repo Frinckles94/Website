@@ -20,7 +20,7 @@
             $errors["Price"] = "Please provide price";
         }else{
             if(is_numeric($_POST["price"])){
-                if($_POST["price"] < 0 ){
+                if($_POST["price"] <= 0 ){
                     $errors["Price"] = "Please provide positive values";
                 }else{
                     $price = $_POST["price"];
