@@ -1,5 +1,4 @@
 <?php
-    include "select.php";
     include "./classes.php";
 
     $errors = array();
@@ -34,7 +33,7 @@
         if(empty($_POST["sku"])){
             $errors["Sku"] = "Please provide SKU";
         }else{
-            if(findDuplicates($_POST["sku"]) == 0){
+            if($database->findDuplicates($_POST["sku"]) == 0){
                 $errors["Sku"] = "SKU should be unique";
             }else{
                 $sku = $_POST["sku"];

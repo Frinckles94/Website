@@ -1,4 +1,8 @@
 <?php
+include './database/databaseClass.php';
+$database = new Database;
+$database->connect();
+
 $uri = $_SERVER["REQUEST_URI"];
 
 switch($uri){

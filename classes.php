@@ -27,9 +27,9 @@ class Disk implements Product{
 
 
     public function addToDB(){
-        global $conn;
+        global $database;
         $addQuery = "INSERT INTO products (`SKU`, `Name`, `Price`, `Size`) VALUES ('$this->sku', '$this->name', '$this->price', '$this->size')";
-        $conn -> query($addQuery) or die($conn->error);
+        $database->add($addQuery);
         header("Location: ../");
         exit(); 
     } 
@@ -75,11 +75,11 @@ class Book implements Product{
 
 
     public function addToDB(){
-        global $conn;
+        global $database;
         $addQuery = "INSERT INTO products (`SKU`, `Name`, `Price`, `Weight`) VALUES ('$this->sku', '$this->name', '$this->price', '$this->weight')";
-        $conn -> query($addQuery) or die($conn->error);
-            header("Location: ../");
-            exit(); 
+        $database->add($addQuery);
+        header("Location: ../");
+        exit(); 
     } 
 
 
@@ -130,9 +130,9 @@ class Furniture implements Product{
 
 
     public function addToDB(){
-        global $conn;
+        global $database;
         $addQuery = "INSERT INTO products (`SKU`, `Name`, `Price`, `Height`, `Width`, `Length`) VALUES ('$this->sku', '$this->name', '$this->price', '$this->height', '$this->width', '$this->length')";    
-        $conn -> query($addQuery) or die($conn->error);
+        $database->add($addQuery);
         header("Location: ../");
         exit(); 
     } 

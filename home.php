@@ -1,10 +1,5 @@
 <?php
-
-
-include_once './database/connect.php';
 include './database/form.php';
-include './database/delete.php';
-
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +21,7 @@ include './database/delete.php';
                     <nav>
                         <ul> 
                             <li> <a href="/product/add"> Add </a> </li>
-                            <li> <input type="submit" value="Mass Delete" name="deleteButton"> </li>
+                            <li> <input type="submit" value="Mass Delete" name="deleteButton" onclick="<?php $database->delete()?>"> </li>
                         </ul>
                     </nav>
                 </div>
@@ -35,6 +30,7 @@ include './database/delete.php';
         
             <div class= container>
                 <?php
+                    $result = $database->select();
                     while($row = $result->fetch_assoc()){
                         $sku = $row["SKU"];
                         $name = $row["Name"];

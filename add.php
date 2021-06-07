@@ -1,5 +1,4 @@
 <?php
-include_once "./database/connect.php";
 include "./database/form.php";
 ?>
 
