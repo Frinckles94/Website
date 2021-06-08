@@ -30,34 +30,71 @@ ob_start();
         
             <div class= container>
                 <?php
-                    $result = $database->select();
-                    while($row = $result->fetch_assoc()){
-                        $sku = $row["SKU"];
-                        $name = $row["Name"];
-                        $price = $row["Price"];
-                        $size = $row["Size"];
-                        $weight = $row["Weight"];
-                        $width = $row["Width"];
-                        $height = $row["Height"];
-                        $length = $row["Length"];
-
+                    $result = Disk::selectFromDB();
+                    if($result!=null){
+                        while($row = $result->fetch_assoc()){
+                            $sku = $row["SKU"];
+                            $name = $row["Name"];
+                            $price = $row["Price"];
+                            $size = $row["Size"];
                 ?>
-                <div class="box">
-                    <input type="checkbox" name="delete[]" value="<?= $sku ?>">
-                    <p><?= $sku ?> </p>
-                    <p><?= $name ?> </p>
-                    <p><?= $price." $" ?> </p>
-                    <p>
-                        <?php 
-                            if($size != NULL) echo $size." MB";
-                            else if($weight !=NULL) echo $weight." KG";
-                            else echo $height."x".$width."x".$length." CM";
-                        ?> 
-                    
-                    </p>
-                </div>
+                        <div class="box">
+                            <input type="checkbox" name="deleteD[]" value="<?= $sku ?>">
+                            <p><?= $sku ?> </p>
+                            <p><?= $name ?> </p>
+                            <p><?= $price." $" ?> </p>
+                            <p><?= "Size: ".$size." MB "?></p>
+                        </div>
                 <?php
                     }
+                }
+                ?>
+                
+
+
+                <?php
+                    $result = Book::selectFromDB();
+                    if($result!=null){
+                        while($row = $result->fetch_assoc()){
+                            $sku = $row["SKU"];
+                            $name = $row["Name"];
+                            $price = $row["Price"];
+                            $weight = $row["Weight"];
+                ?>
+                        <div class="box">
+                            <input type="checkbox" name="deleteB[]" value="<?= $sku ?>">
+                            <p><?= $sku ?> </p>
+                            <p><?= $name ?> </p>
+                            <p><?= $price." $" ?> </p>
+                            <p><?= "Weight: ".$weight." KG "?></p>
+                        </div>
+                <?php
+                    }
+                }
+                ?>
+
+
+                <?php
+                    $result = Furniture::selectFromDB();
+                    if($result!=null){
+                        while($row = $result->fetch_assoc()){
+                            $sku = $row["SKU"];
+                            $name = $row["Name"];
+                            $price = $row["Price"];
+                            $width = $row["Width"];
+                            $height = $row["Height"];
+                            $length = $row["Length"];
+                ?>
+                        <div class="box">
+                            <input type="checkbox" name="deleteF[]" value="<?= $sku ?>">
+                            <p><?= $sku ?> </p>
+                            <p><?= $name ?> </p>
+                            <p><?= $price." $" ?> </p>
+                            <p><?= "Dimention: ".$height."x".$width."x".$length?></p>
+                        </div>
+                <?php
+                    }
+                }
                 ?>
                 
                 

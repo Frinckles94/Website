@@ -66,10 +66,16 @@ class Disk extends Product{
         $this->size = $size;
     }
 
+    public static function selectFromDB(){
+        global $database;
+        $query = "SELECT * FROM disks";
+        $result = $database->select($query);
+        return $result;
+    }
 
     public function addToDB(){
         global $database;
-        $addQuery = "INSERT INTO products (`SKU`, `Name`, `Price`, `Size`) VALUES ('$this->sku', '$this->name', '$this->price', '$this->size')";
+        $addQuery = "INSERT INTO disks (`SKU`, `Name`, `Price`, `Size`) VALUES ('$this->sku', '$this->name', '$this->price', '$this->size')";
         $database->add($addQuery);
         header("Location: ../");
         exit(); 
@@ -112,9 +118,17 @@ class Book extends Product{
     }
 
 
+    public static function selectFromDB(){
+        global $database;
+        $query = "SELECT * FROM books";
+        $result = $database->select($query);
+        return $result;
+
+    }
+
     public function addToDB(){
         global $database;
-        $addQuery = "INSERT INTO products (`SKU`, `Name`, `Price`, `Weight`) VALUES ('$this->sku', '$this->name', '$this->price', '$this->weight')";
+        $addQuery = "INSERT INTO books (`SKU`, `Name`, `Price`, `Weight`) VALUES ('$this->sku', '$this->name', '$this->price', '$this->weight')";
         $database->add($addQuery);
         header("Location: ../");
         exit(); 
@@ -166,11 +180,19 @@ class Furniture extends Product{
 
     public function addToDB(){
         global $database;
-        $addQuery = "INSERT INTO products (`SKU`, `Name`, `Price`, `Height`, `Width`, `Length`) VALUES ('$this->sku', '$this->name', '$this->price', '$this->height', '$this->width', '$this->length')";    
+        $addQuery = "INSERT INTO furniture (`SKU`, `Name`, `Price`, `Height`, `Width`, `Length`) VALUES ('$this->sku', '$this->name', '$this->price', '$this->height', '$this->width', '$this->length')";    
         $database->add($addQuery);
         header("Location: ../");
         exit(); 
     } 
+
+    public static function selectFromDB(){
+        global $database;
+        $query = "SELECT * FROM furniture";
+        $result = $database->select($query);
+        return $result;
+
+    }
 
 
     public static function validateFeatures(){
