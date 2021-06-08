@@ -5,9 +5,9 @@ The SQl statement for DataBase table creation:
 CREATE TABLE IF NOT EXISTS `products` (
   `SKU` varchar(50) NOT NULL,
   `Name` varchar(50) NOT NULL,
-  `Price` int(11) NOT NULL,
+  `Price` float NOT NULL,
   `Size` int(11) DEFAULT NULL,
-  `Weight` int(11) DEFAULT NULL,
+  `Weight` float DEFAULT NULL,
   `Height` int(11) DEFAULT NULL,
   `Width` int(11) DEFAULT NULL,
   `Length` int(11) DEFAULT NULL,

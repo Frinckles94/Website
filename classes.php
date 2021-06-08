@@ -1,20 +1,63 @@
 <?php
 
-interface Product{
-    public function addToDB();
-    public static function validateForm();
-
-}
-
-class Disk implements Product{
+class Product{
     protected $sku;
     protected $name;
     protected $price;
+
+    public function addToDB(){
+
+    }
+    public static function validateFeatures(){
+
+    }
+
+    public function validateCommon(){
+        global $formValidator;
+        global $database;
+        global $name;
+        global $price;
+        global $sku;
+        if(empty($_POST["name"])){
+            $formValidator->errors["Name"] = "Please provide name";
+        }else{
+            $name = $_POST["name"];
+        }
+
+        if(empty($_POST["price"])){
+            $formValidator->errors["Price"] = "Please provide price";
+        }else{
+            if(is_numeric($_POST["price"])){
+                if($_POST["price"] <= 0 ){
+                    $formValidator->errors["Price"] = "Please provide positive values";
+                }else{
+                    $price = $_POST["price"];
+                }
+            }else{
+                $formValidator->errors["Price"] = "Please provide data of indicated type";
+            }
+        }
+
+        if(empty($_POST["sku"])){
+            $formValidator->errors["Sku"] = "Please provide SKU";
+        }else{
+            if($database->findDuplicates($_POST["sku"]) == 0){
+                $formValidator->errors["Sku"] = "SKU should be unique";
+            }else{
+                $sku = $_POST["sku"];
+                
+            }
+        }
+    }
+
+}
+
+class Disk extends Product{
     protected $size;
 
     public function __construct(){
-        global $sku;
         global $name;
+        global $sku;
         global $price;
         global $size;
         $this->sku = $sku;
@@ -32,20 +75,20 @@ class Disk implements Product{
         exit(); 
     } 
 
-    public static function validateForm(){
-        global $errors;
+    public static function validateFeatures(){
+        global $formValidator;
         global $size;
         if(empty($_POST["size"])){
-            $errors["Size"] = "Please provide size";
+            $formValidator->errors["Size"] = "Please provide size";
         }else{
             if(is_numeric($_POST["size"])){
                 if($_POST["size"]<=0){
-                    $errors["Size"] = "Please provide positive values"; 
+                    $formValidator->errors["Size"] = "Please provide positive values"; 
                 }else{
                     $size = $_POST["size"];
                 }
             }else{
-                $errors["Size"] = "Please provide data of indicated type";
+                $formValidator->errors["Size"] = "Please provide data of indicated type";
             }
         }
             
@@ -54,10 +97,7 @@ class Disk implements Product{
 
 
 
-class Book implements Product{
-    protected $sku;
-    protected $name;
-    protected $price;
+class Book extends Product{
     protected $weight;
 
     public function __construct(){
@@ -81,20 +121,20 @@ class Book implements Product{
     } 
 
 
-    public static function validateForm(){
-        global $errors;
+    public static function validateFeatures(){
+        global $formValidator;
         global $weight;
         if(empty($_POST["weight"])){
-            $errors["Weight"] = "Please provide weight";
+            $formValidator->errors["Weight"] = "Please provide weight";
         }else{
             if(is_numeric($_POST["weight"])){
                 if($_POST["weight"]<=0){
-                    $errors["Weight"] = "Please provide positive values"; 
+                    $formValidator->errors["Weight"] = "Please provide positive values"; 
                 }else{
                     $weight = $_POST["weight"];
                 }
             }else{
-                $errors["Weight"] = "Please provide data of indicated type";
+                $formValidator->errors["Weight"] = "Please provide data of indicated type";
             }
         }
     }
@@ -103,10 +143,7 @@ class Book implements Product{
 
 
 
-class Furniture implements Product{
-    protected $sku;
-    protected $name;
-    protected $price;
+class Furniture extends Product{
     protected $height;
     protected $width;
     protected $length;
@@ -136,50 +173,50 @@ class Furniture implements Product{
     } 
 
 
-    public static function validateForm(){
-        global $errors;
+    public static function validateFeatures(){
+        global $formValidator;
         global $height;
         global $width;
         global $length;
         if(empty($_POST["height"])){
-            $errors["Height"] = "Please provide height";
+            $formValidator->errors["Height"] = "Please provide height";
         }else{
             if(is_numeric($_POST["height"])){
                 if($_POST["height"]<=0){
-                    $errors["Height"] = "Please provide positive values"; 
+                    $formValidator->errors["Height"] = "Please provide positive values"; 
                 }else{
                     $height = $_POST["height"];
                 }
             }else{
-                $errors["Height"] = "Please provide data of indicated type";
+                $formValidator->errors["Height"] = "Please provide data of indicated type";
             }
         }
 
         if(empty($_POST["width"])){
-            $errors["Width"] = "Please provide width";
+            $formValidator->errors["Width"] = "Please provide width";
         }else{
             if(is_numeric($_POST["width"])){
                 if($_POST["width"]<=0){
-                    $errors["Width"] = "Please provide positive values"; 
+                    $formValidator->errors["Width"] = "Please provide positive values"; 
                 }else{
                     $width = $_POST["width"];
                 }
             }else{
-                $errors["Width"] = "Please provide data of indicated type";
+                $formValidator->errors["Width"] = "Please provide data of indicated type";
             }
         }
 
         if(empty($_POST["length"])){
-            $errors["Length"] = "Please provide length";
+            $formValidator->errors["Length"] = "Please provide length";
         }else{
             if(is_numeric($_POST["length"])){
                 if($_POST["length"]<=0){
-                    $errors["Length"] = "Please provide positive values"; 
+                    $formValidator->errors["Length"] = "Please provide positive values"; 
                 }else{
                     $length = $_POST["length"];
                 }
             }else{
-                $errors["Length"] = "Please provide data of indicated type";
+                $formValidator->errors["Length"] = "Please provide data of indicated type";
             }
         }
     }
@@ -189,7 +226,7 @@ class Furniture implements Product{
 
 class ProductController{
     public function validate(Product $productClass){
-        $productClass->validateForm();
+        $productClass->validateFeatures();
     }
 }
 
