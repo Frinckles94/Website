@@ -95,7 +95,7 @@ input[type=checkbox]{
     color: red;
 }
 
-#addForm input[type=text], #addForm input[type=number]{
+.form input[type=text], .form input[type=number], .form input[type=password]{
     padding: 10px 20px;
     margin: 10px 0;
     width: 30%;

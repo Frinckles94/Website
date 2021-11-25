@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `disks` (
   `Price` float NOT NULL,
   `Size` int(11) NOT NULL,
   UNIQUE KEY `SKU` (`SKU`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE IF NOT EXISTS `books` (
   `SKU` varchar(50) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `books` (
   `Price` float NOT NULL,
   `Weight` float NOT NULL,
   UNIQUE KEY `SKU` (`SKU`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 CREATE TABLE IF NOT EXISTS `furniture` (
   `SKU` varchar(50) NOT NULL,
@@ -26,5 +26,14 @@ CREATE TABLE IF NOT EXISTS `furniture` (
   `Width` int(11) NOT NULL,
   `Length` int(11) NOT NULL,
   UNIQUE KEY `SKU` (`SKU`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `ID` int(11) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  `Name` varchar(50) NOT NULL,
+  `Surname` varchar(50) NOT NULL,
+  `Username` varchar(50) NOT NULL,
+  `Email` varchar(50) NOT NULL,
+  `Password` varchar(50) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 COMMIT;
