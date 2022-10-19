@@ -6,3 +6,4 @@ function augmentForm(){
     document.getElementById("furniture").style.display = "none";
     if(sValue!= "") document.getElementById(sValue).style.display = "initial";
 }
+

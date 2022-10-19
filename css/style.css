@@ -95,10 +95,12 @@ input[type=checkbox]{
     color: red;
 }
 
-.form input[type=text], .form input[type=number], .form input[type=password]{
+input[type=text], input[type=number], input[type=password]{
     padding: 10px 20px;
     margin: 10px 0;
-    width: 30%;
+    height:20px;
+    width: 100%;
+    display: block;
     
 }
 
@@ -116,6 +118,14 @@ select{
 header li a:hover , input[type=submit]:hover{
     color: white;
     transition: color 0.3s ease-in-out;
+}
+
+form.auth{
+    position: absolute;
+    top:30%;
+    left:40%;
+    height:20%;
+    width: 20%;
 }
 
 

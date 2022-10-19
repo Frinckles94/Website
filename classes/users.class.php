@@ -30,27 +30,14 @@ class User{
         return $result;
     }
 
-    // public function addToDB(){
-    //     global $database;
-    //     $addQuery = "INSERT INTO users (`Name`, `Surname`, `Username`, `Email`, `Password`) VALUES ('$this->name', '$this->surname', '$this->username', '$this->email', '$this->password')";
-    //     $database->add($addQuery);
-    //     header("location: /");
-    //     exit(); 
-    // }
-
-    // public static function logIn(){
-    //     session_start();
-    //     $_SESSION["userid"] = "???????????";
-    //     header("location: /"); 
-    // }
 
     public static function logOut(){
-        //if(isset($_POST["logoutbutton"])){
+        if(isset($_POST["logoutbutton"])){
             session_start();
             session_unset();
             session_destroy();
             header("location: /");
-       // }
+        }
     }
 
 

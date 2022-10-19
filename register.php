@@ -5,7 +5,7 @@ include_once './classes/register.controller.php';
 $registerController = new RegisterController;
 ?>
     <div class= "container">
-        <form method="POST" class= "form">
+        <form method="POST" class= "auth">
             <input type= "text" name="name" placeholder="Name">
             <input type= "text" name="surname" placeholder="Surname">
             <input type= "text" name="username" placeholder="User Name">

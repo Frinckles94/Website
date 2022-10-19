@@ -3,7 +3,7 @@ include_once 'database.class.php';
 include_once 'users.class.php';
 class RegisterController extends Database{
 
-    public $errors;
+    protected $errors;
 
     public function __construct(){
         $this->errors = array();
@@ -46,16 +46,32 @@ class RegisterController extends Database{
             }
             if(isset($_POST["username"])){
                 $username = $_POST['username'];
+                $stmt = "SELECT Username from users";
+                $this->connect();
+                $result = $this->select($stmt);
+                while($row = $result->fetch_assoc()){
+                    if($username == $row["Username"]){
+                        $this->errors["username"] = "Username should be unique";
+                        break;
+                    } 
+                }
+                
             }else{
                 $this->errors["username"] = "Username should not be empty";
             }
             if(isset($_POST["email"])){
                 $email = $_POST['email'];
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                    $this->errors["email"] = "Invalid email format";
+                  }
             }else{
                 $this->errors["email"] = "Email should not be empty";
             }
             if(isset($_POST["password"])){
                 $password = $_POST['password'];
+                if(strlen($password)<6){
+                    $this->errors["password"] = "Password should be at least 6 symbols";
+                }
             }else{
                 $this->errors["password"] = "Password should not be empty";
             }
@@ -72,6 +88,8 @@ class RegisterController extends Database{
             if(count($this->errors) == 0){
                 $object = new User($name, $surname, $username, $email, $password);
                 $this->addToDB($object);
+            }else{
+                header("Location: /register");
             }
         }
     }

@@ -24,7 +24,7 @@ class LoginController extends Database{
             }
 
             if(count($this->errors) == 0){
-                $stmt = "SELECT * from users WHERE Name = $log or Email = $log";
+                $stmt = "SELECT * from users WHERE Username = $log";
                 $this->connect();
                 $result = $this->select($stmt);
                 $user = $result->fetch_assoc();
@@ -32,6 +32,8 @@ class LoginController extends Database{
                 if($user['Password'] == $pass){
                     session_start();
                     $_SESSION["userid"] = $user["ID"];
+                    $_SESSION["name"] = $user["Name"];
+                    $_SESSION["isAdmin"] = $user["is_Admin"];
                     header("Location: /");
                 }else{
                     $this->errors["auth"] = "Invalid credentials";
@@ -42,7 +44,5 @@ class LoginController extends Database{
         }
     }
 
-    protected function getUser($log, $pass){
-        
-    }
+
 }

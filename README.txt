@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `Surname` varchar(50) NOT NULL,
   `Username` varchar(50) NOT NULL,
   `Email` varchar(50) NOT NULL,
-  `Password` varchar(50) NOT NULL
+  `Password` varchar(50) NOT NULL,
+  `is_Admin` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 COMMIT;

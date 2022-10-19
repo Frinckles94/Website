@@ -24,6 +24,9 @@ switch($uri){
     case '/login':
         require __DIR__/"/register.php";
         break;
+    case '/profile':
+        require __DIR__."/profile.php";
+        break;
     case '/product/add':
         require __DIR__."/add.php";
         break;

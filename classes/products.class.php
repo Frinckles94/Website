@@ -14,6 +14,10 @@ class Product{
 
     }
 
+    public static function show(){
+    
+    }
+
     public function validateCommon(){
         global $formValidator;
         global $database;
@@ -68,6 +72,7 @@ class Disk extends Product{
         $this->size = $size;
     }
 
+
     public static function selectFromDB(){
         global $database;
         $query = "SELECT * FROM disks";
@@ -75,10 +80,35 @@ class Disk extends Product{
         return $result;
     }
 
+    public static function show(){
+        $result = Disk::selectFromDB();
+        if($result!=null){
+            while($row = $result->fetch_assoc()){
+                $sku = $row["SKU"];
+                $name = $row["Name"];
+                $price = $row["Price"];
+                $size = $row["Size"];
+                ?>
+                <div class="box">
+                    <?php if(isset($_SESSION["userid"])){ ?>
+                    <?php if($_SESSION["isAdmin"] == 1){ ?>
+                        <input type="checkbox" name="deleteD[]" value="<?= $sku ?>">
+                    <?php }} ?>
+                    <p><?= $sku ?> </p>
+                    <p><?= $name ?> </p>
+                    <p><?= "Price: ".$price." $" ?> </p>
+                    <p><?= "Size: ".$size." MB "?></p>
+                </div>
+                <?php
+                }
+            }
+
+    }
+
     public function addToDB(){
         global $database;
         $addQuery = "INSERT INTO disks (`SKU`, `Name`, `Price`, `Size`) VALUES ('$this->sku', '$this->name', '$this->price', '$this->size')";
-        $database->add($addQuery);
+        $database->change($addQuery);
         header("Location: ../");
         exit(); 
     } 
@@ -128,10 +158,34 @@ class Book extends Product{
 
     }
 
+    public static function show(){
+        $result = Book::selectFromDB();
+        if($result!=null){
+            while($row = $result->fetch_assoc()){
+                $sku = $row["SKU"];
+                $name = $row["Name"];
+                $price = $row["Price"];
+                $weight = $row["Weight"];
+                ?>
+                <div class="box">
+                <?php if(isset($_SESSION["userid"])){ ?>
+                        <?php if($_SESSION["isAdmin"] == 1){ ?>
+                        <input type="checkbox" name="deleteB[]" value="<?= $sku ?>">
+                        <?php }} ?>
+                        <p><?= $sku ?> </p>
+                        <p><?= $name ?> </p>
+                        <p><?= "Price: ".$price." $" ?> </p>
+                        <p><?= "Weight: ".$weight." KG "?></p>
+                </div>
+                <?php
+                }
+            }
+    }
+
     public function addToDB(){
         global $database;
         $addQuery = "INSERT INTO books (`SKU`, `Name`, `Price`, `Weight`) VALUES ('$this->sku', '$this->name', '$this->price', '$this->weight')";
-        $database->add($addQuery);
+        $database->change($addQuery);
         header("Location: ../");
         exit(); 
     } 
@@ -183,7 +237,7 @@ class Furniture extends Product{
     public function addToDB(){
         global $database;
         $addQuery = "INSERT INTO furniture (`SKU`, `Name`, `Price`, `Height`, `Width`, `Length`) VALUES ('$this->sku', '$this->name', '$this->price', '$this->height', '$this->width', '$this->length')";    
-        $database->add($addQuery);
+        $database->change($addQuery);
         header("Location: ../");
         exit(); 
     } 
@@ -193,6 +247,33 @@ class Furniture extends Product{
         $query = "SELECT * FROM furniture";
         $result = $database->select($query);
         return $result;
+
+    }
+
+    public static function show(){
+        $result = Furniture::selectFromDB();
+        if($result!=null){
+            while($row = $result->fetch_assoc()){
+                $sku = $row["SKU"];
+                $name = $row["Name"];
+                $price = $row["Price"];
+                $width = $row["Width"];
+                $height = $row["Height"];
+                $length = $row["Length"];
+                ?>
+                <div class="box">
+                <?php if(isset($_SESSION["userid"])){ ?>
+                        <?php if($_SESSION["isAdmin"] == 1){ ?>
+                        <input type="checkbox" name="deleteF[]" value="<?= $sku ?>">
+                        <?php }} ?>
+                        <p><?= $sku ?> </p>
+                        <p><?= $name ?> </p>
+                        <p><?= "Price: ".$price." $" ?> </p>
+                        <p><?= "Dimention: ".$height."x".$width."x".$length?></p>
+                </div>
+                <?php
+                }
+            }
 
     }
 
